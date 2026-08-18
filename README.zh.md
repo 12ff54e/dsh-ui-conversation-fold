@@ -18,7 +18,7 @@ Web 端「仅对话」折叠插件：一个纯浏览器包，向会话头部（`
 
 ```sh
 dsh plugin --profile web add \
-  https://github.com/<owner>/dsh-ui-conversation-fold/releases/download/v0.1.0-rc.5/dsh-ui-conversation-fold-0.1.0-rc.5.tgz
+  https://github.com/12ff54e/dsh-ui-conversation-fold/releases/download/v0.1.0-rc.5/dsh-ui-conversation-fold-0.1.0-rc.5.tgz
 ```
 
 ## Model Experience

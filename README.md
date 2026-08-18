@@ -18,7 +18,7 @@ Pushing a `v*` tag runs the bundled [release workflow](.github/workflows/release
 
 ```sh
 dsh plugin --profile web add \
-  https://github.com/<owner>/dsh-ui-conversation-fold/releases/download/v0.1.0-rc.5/dsh-ui-conversation-fold-0.1.0-rc.5.tgz
+  https://github.com/12ff54e/dsh-ui-conversation-fold/releases/download/v0.1.0-rc.5/dsh-ui-conversation-fold-0.1.0-rc.5.tgz
 ```
 
 ## Model Experience
