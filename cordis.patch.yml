@@ -1,0 +1,7 @@
+# UI conversation-fold bundle patch. Add this bundle to a web profile (after
+# @deepseek-ai/dsh-web-app) to mount the conversation-only reading toggle: its
+# browser half registers one session-header action that folds thinking, tool
+# calls, and turn chrome out of the chat flow, leaving user and assistant text.
+- insert:
+    - id: ui-conversation-fold
+      name: 'dsh-ui-conversation-fold'
