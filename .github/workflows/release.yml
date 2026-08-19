@@ -11,18 +11,9 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 20
     steps:
-      - name: Check out plugin
-        uses: actions/checkout@v4
-        with:
-          path: plugin
-
-      - name: Check out deepseek-harness
-        uses: actions/checkout@v4
-        with:
-          repository: deepseek-ai/deepseek-harness
-          path: harness
+      - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
         with:
@@ -32,32 +23,14 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-          cache-dependency-path: harness/pnpm-lock.yaml
 
-      - name: Move plugin into the harness workspace
-        run: |
-          mkdir -p harness/dsh-plugins
-          mv plugin harness/dsh-plugins/dsh-ui-conversation-fold
-          sed -i '/^linkWorkspacePackages:/i\  - dsh-plugins/*' harness/pnpm-workspace.yaml
-
-      - name: Install harness workspace
-        working-directory: harness
+      - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Build harness host libs
-        working-directory: harness
-        run: pnpm run build:lib:host
-
-      - name: Build harness client libs
-        working-directory: harness
-        run: pnpm run build:lib:client
-
       - name: Build plugin
-        working-directory: harness
-        run: pnpm --filter dsh-ui-conversation-fold run build
+        run: pnpm run build
 
       - name: Pack plugin tarball
-        working-directory: harness/dsh-plugins/dsh-ui-conversation-fold
         run: |
           mkdir -p dist
           pnpm pack --pack-destination dist
@@ -65,4 +38,4 @@ jobs:
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          files: harness/dsh-plugins/dsh-ui-conversation-fold/dist/dsh-ui-conversation-fold-*.tgz
+          files: dist/dsh-ui-conversation-fold-*.tgz
